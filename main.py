@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 df = pd.read_csv('all_data.csv')
 
@@ -23,6 +24,7 @@ life_dict = {
     "Zimbabwe": []
 
 }
+years = list(dict.fromkeys(df.Year.to_list()))
 
 for index in df.index:
     if(df["Country"][index] == "Chile"):
@@ -68,6 +70,31 @@ life_avgs = {
 }
 
 # Does GDP correlate with time?
+
+## to find this, there are a few tools that we can use, such as visualisation tools like scatter plots and quantitative stats such as pearson correlation
+
+# setting up the figure to show multiple plots in one window
+fig = plt.figure(1)
+cols = 3
+rows = 2
+i = 1
+colors_list = ['brown', 'red', 'black', 'green', 'blue', 'purple']
+
+# looping through each country in the dictionary so that we can create and label each scatter plot
+for country in gdp_dict:
+    fig.add_subplot(rows, cols, i)
+    plt.scatter(x=years, y=gdp_dict[country], color=colors_list[i-1])
+    plt.xlabel('Years (2000-2015)')
+    plt.ylabel('GDP')
+    plt.title(country)
+    plt.subplots_adjust(hspace=0.5, wspace=1)
+    i += 1
+
+# making sure plt.show() and supertitle is OUTSIDE the loop so that only one window is shown.
+plt.suptitle("GDP vs. Time")
+plt.show()
+
+### NEXT TO DO: Adjust title positions ###
 
 # Does life span correlate with time?
 
