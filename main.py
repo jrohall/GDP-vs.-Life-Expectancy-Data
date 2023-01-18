@@ -231,23 +231,33 @@ with open('life_gdp_data_report.txt', 'w') as f:
 
     # averages
     f.write(" ==== GDP AVERAGES ==== ")
+    f.write("\n")
     for country in gdp_avgs:
         f.write(f"{country}: {gdp_avgs[country]}")
+        f.write("\n")
     f.write("\n")
     f.write(" ==== LIFE SPAN AVERAGES ==== ")
+    f.write("\n")
     for country in life_avgs:
         f.write(f"{country}: {life_avgs[country]}")
+        f.write("\n")
     f.write("\n")
 
     # correlations
     f.write(" ==== GDP vs. TIME CORRELATION ==== ")
+    f.write("\n")
     for country in corr_gdp_time_dict:
         f.write(f"{country}: {corr_gdp_time_dict[country]}")
+        f.write("\n")
     f.write("\n")
     f.write(" ==== LIFE SPAN vs. TIME CORRELATION ==== ")
+    f.write("\n")
     for country in corr_life_time_dict:
         f.write(f"{country}: {corr_life_time_dict[country]}")
+        f.write("\n")
     f.write("\n")
     f.write(" ==== GDP vs. LIFE SPAN CORRELATION ==== ")
+    f.write("\n")
     for country in corr_gdp_life_dict:
         f.write(f"{country}: {corr_gdp_life_dict[country]}")
+        f.write("\n")
