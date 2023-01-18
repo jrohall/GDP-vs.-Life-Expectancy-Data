@@ -93,6 +93,7 @@ for country in gdp_dict:
 
 ## making sure plt.show() and supertitle is OUTSIDE the loop so that only one window is shown.
 plt.suptitle("GDP vs. Time")
+plt.savefig('gdp_time_plt.png')
 plt.show()
 plt.clf()
 
@@ -143,6 +144,7 @@ for country in life_dict:
 
 ## making sure plt.show() and supertitle is OUTSIDE the loop so that only one window is shown.
 plt.suptitle("Life Expectancy vs. Time")
+plt.savefig('lifespan_time_plt.png')
 plt.show()
 plt.clf()
 
@@ -192,6 +194,7 @@ for country in life_dict:
 
 ## making sure plt.show() and supertitle is OUTSIDE the loop so that only one window is shown.
 plt.suptitle("Life Expectancy vs. GDP")
+plt.savefig('gdp_life_plt.png')
 plt.show()
 plt.clf()
 
@@ -224,3 +227,27 @@ for country in gdp_dict:
 
 
 #### Reports ####
+with open('life_gdp_data_report.txt', 'w') as f:
+
+    # averages
+    f.write(" ==== GDP AVERAGES ==== ")
+    for country in gdp_avgs:
+        f.write(f"{country}: {gdp_avgs[country]}")
+    f.write("\n")
+    f.write(" ==== LIFE SPAN AVERAGES ==== ")
+    for country in life_avgs:
+        f.write(f"{country}: {life_avgs[country]}")
+    f.write("\n")
+
+    # correlations
+    f.write(" ==== GDP vs. TIME CORRELATION ==== ")
+    for country in corr_gdp_time_dict:
+        f.write(f"{country}: {corr_gdp_time_dict[country]}")
+    f.write("\n")
+    f.write(" ==== LIFE SPAN vs. TIME CORRELATION ==== ")
+    for country in corr_life_time_dict:
+        f.write(f"{country}: {corr_life_time_dict[country]}")
+    f.write("\n")
+    f.write(" ==== GDP vs. LIFE SPAN CORRELATION ==== ")
+    for country in corr_gdp_life_dict:
+        f.write(f"{country}: {corr_gdp_life_dict[country]}")
