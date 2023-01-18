@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from scipy.stats import pearsonr
 
 df = pd.read_csv('all_data.csv')
 
@@ -69,36 +70,157 @@ life_avgs = {
 
 }
 
-# Does GDP correlate with time?
+#### Does GDP correlate with time? ####
 
 ## to find this, there are a few tools that we can use, such as visualisation tools like scatter plots and quantitative stats such as pearson correlation
 
-# setting up the figure to show multiple plots in one window
+## setting up the figure to show multiple plots in one window
 fig = plt.figure(1)
 cols = 3
 rows = 2
 i = 1
 colors_list = ['brown', 'red', 'black', 'green', 'blue', 'purple']
 
-# looping through each country in the dictionary so that we can create and label each scatter plot
+## looping through each country in the dictionary so that we can create and label each scatter plot
 for country in gdp_dict:
     fig.add_subplot(rows, cols, i)
     plt.scatter(x=years, y=gdp_dict[country], color=colors_list[i-1])
     plt.xlabel('Years (2000-2015)')
     plt.ylabel('GDP')
-    plt.title(country)
+    plt.title(country, loc='right')
     plt.subplots_adjust(hspace=0.5, wspace=1)
     i += 1
 
-# making sure plt.show() and supertitle is OUTSIDE the loop so that only one window is shown.
+## making sure plt.show() and supertitle is OUTSIDE the loop so that only one window is shown.
 plt.suptitle("GDP vs. Time")
 plt.show()
+plt.clf()
 
-### NEXT TO DO: Adjust title positions ###
+## calculating pearson correlation, storing p value and correlations in respective dictionaries.
+corr_gdp_time_dict = {
 
-# Does life span correlate with time?
+    "Chile": [],
+    "China": [],
+    "Germany": [],
+    "Mexico": [],
+    "America": [],
+    "Zimbabwe": []
 
-# Does life span correlate with gdp?
+}
+p_gdp_time_dict = {
+
+    "Chile": [],
+    "China": [],
+    "Germany": [],
+    "Mexico": [],
+    "America": [],
+    "Zimbabwe": []
+
+}
+
+## looping through correlation calculations for each entry in the dictionary
+for country in gdp_dict:
+    corr_gdp_time_dict["{0}".format(country)], p_gdp_time_dict["{0}".format(country)] = pearsonr(years, gdp_dict[country])
 
 
 
+#### Does life span correlate with time? ####
+fig = plt.figure(1)
+cols = 3
+rows = 2
+i = 1
+colors_list = ['brown', 'red', 'black', 'green', 'blue', 'purple']
+
+## looping through each country in the dictionary so that we can create and label each scatter plot
+for country in life_dict:
+    fig.add_subplot(rows, cols, i)
+    plt.scatter(x=years, y=life_dict[country], color=colors_list[i-1])
+    plt.xlabel('Years (2000-2015)')
+    plt.ylabel('Life Expectancy')
+    plt.title(country, loc='right')
+    plt.subplots_adjust(hspace=0.5, wspace=1)
+    i += 1
+
+## making sure plt.show() and supertitle is OUTSIDE the loop so that only one window is shown.
+plt.suptitle("Life Expectancy vs. Time")
+plt.show()
+plt.clf()
+
+
+## calculating pearson correlation, storing p value and correlations in respective dictionaries.
+corr_life_time_dict = {
+
+    "Chile": [],
+    "China": [],
+    "Germany": [],
+    "Mexico": [],
+    "America": [],
+    "Zimbabwe": []
+
+}
+p_life_time_dict = {
+
+    "Chile": [],
+    "China": [],
+    "Germany": [],
+    "Mexico": [],
+    "America": [],
+    "Zimbabwe": []
+
+}
+
+## looping through correlation calculations for each entry in the dictionary
+for country in life_dict:
+    corr_life_time_dict["{0}".format(country)], p_life_time_dict["{0}".format(country)] = pearsonr(years, life_dict[country])
+
+#### Does life span correlate with gdp? ####
+fig = plt.figure(1)
+cols = 3
+rows = 2
+i = 1
+colors_list = ['brown', 'red', 'black', 'green', 'blue', 'purple']
+
+## looping through each country in the dictionary so that we can create and label each scatter plot
+for country in life_dict:
+    fig.add_subplot(rows, cols, i)
+    plt.scatter(x=life_dict[country], y=gdp_dict[country], color=colors_list[i-1])
+    plt.xlabel('Life Expectancy')
+    plt.ylabel('GDP')
+    plt.title(country, loc='right')
+    plt.subplots_adjust(hspace=0.5, wspace=1)
+    i += 1
+
+## making sure plt.show() and supertitle is OUTSIDE the loop so that only one window is shown.
+plt.suptitle("Life Expectancy vs. GDP")
+plt.show()
+plt.clf()
+
+## calculating pearson correlation, storing p value and correlations in respective dictionaries.
+corr_gdp_life_dict = {
+
+    "Chile": [],
+    "China": [],
+    "Germany": [],
+    "Mexico": [],
+    "America": [],
+    "Zimbabwe": []
+
+}
+p_gdp_life_dict = {
+
+    "Chile": [],
+    "China": [],
+    "Germany": [],
+    "Mexico": [],
+    "America": [],
+    "Zimbabwe": []
+
+}
+
+## looping through correlation calculations for each entry in the dictionary
+for country in gdp_dict:
+    corr_gdp_life_dict["{0}".format(country)], p_gdp_life_dict["{0}".format(country)] = pearsonr(life_dict[country], gdp_dict[country])
+
+
+
+#### Reports ####
